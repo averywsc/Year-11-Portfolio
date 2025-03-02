@@ -5,14 +5,201 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Year 11 Portfolio</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Hide overflow while loading */
+        }
+        .topnav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            background-color: white; 
+        }
+        .topnav a {
+            display: inline-block;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .topnav a img {
+            width: 50px; 
+            height: auto;
+            transition: transform 0.3s; 
+        }
+        .topnav a:hover img {
+            transform: scale(1.1); 
+        }
+        .topnav a.active img {
+            transform: scale(1.1); 
+        }
+        #projects {
+            margin-top: 2000px; 
+        }
+        
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+        ::-webkit-scrollbar-track {
+            background: white; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: white; 
+            border-radius: 0; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ffffff;
+        }
+        
+        .centered-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .centered-text h1 {
+            font-size: 3em;
+            color: #333;
+        }
+        .centered-text h2 {
+            font-size: 2em;
+            color: #666;
+        }
+        .project-boxes {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .project-box {
+            width: 30%;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+
+        .project-box h3 {
+            margin-top: 0;
+        }
+
+        .project-box p {
+            color: #666;
+        }
+
+        /* Loading bar styles */
+        #loading-bar-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 400px;
+            height: 4px;
+            background-color: #ddd;
+            z-index: 10001;
+        }
+        #loading-bar {
+            width: 0;
+            height: 100%;
+            background-color: #4caf50;
+            transition: width 4s ease;
+        }
+
+        /* Hide content initially */
+        #content {
+            display: none;
+        }
+    </style>
 </head>
-<body>
-    <div class="topnav">
-        <a class="active" href="index.html">Home</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
-        <a href="about.html">About</a>
+<body id="home">
+    <div id="loading-bar-container">
+        <div id="loading-bar"></div>
     </div>
-    <h1>Welcome to the Year 11 Portfolio</h1>
+    <div id="content">
+        <div class="topnav" id="navbar">
+            <a class="active" href="#home" id="home-link"><img src="home.png" alt="Home"></a>
+            <a href="#projects" id="projects-link"><img src="projects.png" alt="Projects"></a>
+            <a href="contact.html" id="contact-link"><img src="contact.png" alt="Contact"></a>
+            <a href="about.html" id="about-link"><img src="about_Me.png" alt="About"></a>
+        </div>
+        
+        <div class="centered-text" id="centered-text">
+            <h1>Avery Beuth</h1>
+            <h2>Year 11 Portfolio</h2>
+        </div>
+        
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="project-boxes">
+                <div class="project-box">
+                    <h3>Project 1</h3>
+                    <p>Description of Project 1</p>
+                </div>
+                <div class="project-box">
+                    <h3>Project 2</h3>
+                    <p>Description of Project 2</p>
+                </div>
+                <div class="project-box">
+                    <h3>Project 3</h3>
+                    <p>Description of Project 3</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.onreadystatechange = function () {
+            var loadingBar = document.getElementById('loading-bar');
+            var loadingBarContainer = document.getElementById('loading-bar-container');
+            var content = document.getElementById('content');
+            if (document.readyState === 'interactive') {
+                loadingBar.style.width = '100%';
+            } else if (document.readyState === 'complete') {
+                setTimeout(function() {
+                    loadingBarContainer.style.display = 'none';
+                    content.style.display = 'block';
+                    document.body.style.overflow = 'auto'; // Restore overflow
+                }, 4000); // 4 seconds
+            }
+        };
+
+        window.onscroll = function() {
+            var homeLink = document.getElementById("home-link");
+            var projectsLink = document.getElementById("projects-link");
+            var projectsSection = document.getElementById("projects");
+            var projectsSectionTop = projectsSection.offsetTop;
+
+            if (window.scrollY >= projectsSectionTop - 50) {
+                homeLink.classList.remove("active");
+                projectsLink.classList.add("active");
+            } else {
+                homeLink.classList.add("active");
+                projectsLink.classList.remove("active");
+            }
+        };
+
+        document.getElementById("home-link").addEventListener("click", function(event) {
+            event.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.addEventListener('mousemove', function(e) {
+            var centeredText = document.getElementById('centered-text');
+            var x = e.clientX / window.innerWidth * 15 - 10; // Adjust the multiplier and offset as needed
+            var y = e.clientY / window.innerHeight * 15 - 10; // Adjust the multiplier and offset as needed
+            centeredText.style.transform = 'translate(-50%, -50%) translate(' + x + 'px, ' + y + 'px)';
+        });
+    </script>
 </body>
 </html>
