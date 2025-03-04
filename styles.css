@@ -1,21 +1,31 @@
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+html {
+    scroll-behavior: smooth;
+}
+
+body, html {
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     background-color: #ffffff;
 }
 
 .topnav {
-    background-color: white; 
-    overflow: hidden;
-    margin: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
+    background-color: white; 
 }
 
 .topnav a {
+    display: inline-block;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -26,26 +36,31 @@ body {
 .topnav a img {
     width: 50px; 
     height: auto;
-    transition: transform 0.3s; 
+    transition: transform 0.3s, filter 0.3s; 
 }
 
 .topnav a:hover img {
-    transform: scale(1.1);
-    filter: brightness(0) saturate(100%) invert(30%) sepia(83%) saturate(500%) hue-rotate(150deg) brightness(92%) contrast(92%);
+    transform: scale(1.2);
+   
 }
 
 .topnav a.active img {
-    transform: scale(1.1); 
+    transform: scale(1.2); 
 }
 
 #home-link:hover img {
-    transform: scale(1.1); 
+    transform: scale(1.2); 
 }
 
 #projects-link:hover img,
 #contact-link:hover img,
 #about-link:hover img {
-    transform: scale(1.1); 
+    transform: scale(1.2); 
+}
+
+#projects {
+    margin-top: 2000px; 
+    text-align: center;
 }
 
 .content {
@@ -72,14 +87,15 @@ body {
 }
 
 .centered-text h1 {
+    display: block;
     font-size: 64px;
     color: #333;
 }
 
 .centered-text h2 {
+    display: block;
     font-size: 36px; 
-    color: #000; /* Change the color to black */
-    display: block; /* Ensure it is displayed as a block element */
+    color: #000; 
     margin-top: 10px;
 }
 
@@ -89,7 +105,7 @@ body {
 }
 
 .centered-text span:hover {
-    color: rgb(11, 147, 175);
+    
     transform: scale(1.1);
 }
 
@@ -97,17 +113,17 @@ body {
     display: flex;
     justify-content: space-around;
     margin-top: 20px;
-    margin-bottom: 40px; /* Add space below the project boxes */
+    margin-bottom: 50px; 
 }
 
 .project-box {
     width: 30%;
     padding: 20px;
-    border: 10px solid #000000;
+    border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
     background-color: #f9f9f9;
-    margin: 15px; /* Add space between each project box */
+    margin: 10px; 
 }
 
 .project-box h3 {
@@ -119,8 +135,8 @@ body {
 }
 
 .rainbow-text {
-    font-size: 60px; /* Make the text bigger */
-    animation: moveAround 5s infinite alternate; /* Constantly move around */
+    font-size: 60px; 
+    animation: moveAround 5s infinite alternate; 
 }
 
 .rainbow-text span {
@@ -142,8 +158,56 @@ body {
 
 @keyframes moveAround {
     0% { transform: translate(0, 0); }
-    25% { transform: translate(5px, -5px); }
-    50% { transform: translate(-5px, 5px); }
-    75% { transform: translate(5px, 5px); }
-    100% { transform: translate(-5px, -5px); }
+    25% { transform: translate(0, -10px); }
+    50% { transform: translate(0, 0); }
+    75% { transform: translate(0, -10px); }
+    100% { transform: translate(0, 0); }
+}
+
+#stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1; 
+}
+
+.star {
+    position: absolute;
+    bottom: 0;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh);
+        opacity: 0;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-track {
+    background: white; 
+}
+
+::-webkit-scrollbar-thumb {
+    background: white; 
+    border-radius: 0; 
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
 }
