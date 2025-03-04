@@ -43,6 +43,7 @@
         }
         #projects {
             margin-top: 2000px; 
+            text-align: center; /* Center the text */
         }
         
         ::-webkit-scrollbar {
@@ -66,8 +67,16 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        .centered-text h1, .centered-text h2 {
-            display: inline-block;
+        .centered-text h1 {
+            display: block;
+            font-size: 64px;
+            color: #333;
+        }
+        .centered-text h2 {
+            display: block;
+            font-size: 36px;
+            color: #000; /* Change the color to black */
+            margin-top: 10px;
         }
         .centered-text span {
             display: inline-block;
@@ -81,6 +90,7 @@
             display: flex;
             justify-content: space-around;
             margin-top: 20px;
+            margin-bottom: 40px; /* Add space below the project boxes */
         }
 
         .project-box {
@@ -90,6 +100,7 @@
             border-radius: 5px;
             text-align: center;
             background-color: #f9f9f9;
+            margin:  10px; /* Add space between each project box */
         }
 
         .project-box h3 {
@@ -122,7 +133,9 @@
     </div>
     
     <section id="projects">
-        <h2>Projects</h2>
+        <h2 class="rainbow-text">
+            <span>P</span><span>r</span><span>o</span><span>j</span><span>e</span><span>c</span><span>t</span><span>s</span>
+        </h2>
         <div class="project-boxes">
             <div class="project-box">
                 <h3>Project 1</h3>
