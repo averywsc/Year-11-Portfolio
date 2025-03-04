@@ -12,7 +12,6 @@
         body, html {
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Hide overflow while loading */
         }
         .topnav {
             position: fixed;
@@ -33,10 +32,11 @@
         .topnav a img {
             width: 50px; 
             height: auto;
-            transition: transform 0.3s; 
+            transition: transform 0.3s, filter 0.3s; 
         }
         .topnav a:hover img {
             transform: scale(1.1); 
+            filter: brightness(100%) saturate(100%) invert(30%) sepia(83%) saturate(500%) hue-rotate(150deg) brightness(92%) contrast(92%);
         }
         .topnav a.active img {
             transform: scale(1.1); 
@@ -66,13 +66,16 @@
             left: 50%;
             transform: translate(-50%, -50%);
         }
-        .centered-text h1 {
-            font-size: 3em;
-            color: #333;
+        .centered-text h1, .centered-text h2 {
+            display: inline-block;
         }
-        .centered-text h2 {
-            font-size: 2em;
-            color: #666;
+        .centered-text span {
+            display: inline-block;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .centered-text span:hover {
+            color: rgb(11, 147, 175);
+            transform: scale(1.1);
         }
         .project-boxes {
             display: flex;
@@ -96,84 +99,47 @@
         .project-box p {
             color: #666;
         }
-
-        /* Loading bar styles */
-        #loading-bar-container {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 400px;
-            height: 4px;
-            background-color: #ddd;
-            z-index: 10001;
-        }
-        #loading-bar {
-            width: 0;
-            height: 100%;
-            background-color: #4caf50;
-            transition: width 4s ease;
-        }
-
-        /* Hide content initially */
-        #content {
-            display: none;
-        }
     </style>
 </head>
 <body id="home">
-    <div id="loading-bar-container">
-        <div id="loading-bar"></div>
+    <div class="topnav" id="navbar">
+        <a class="active" href="#home" id="home-link"><img src="home.png" alt="Home"></a>
+        <a href="#projects" id="projects-link"><img src="projects.png" alt="Projects"></a>
+        <a href="contact.html" id="contact-link"><img src="contact.png" alt="Contact"></a>
+        <a href="about.html" id="about-link"><img src="about_Me.png" alt="About"></a>
     </div>
-    <div id="content">
-        <div class="topnav" id="navbar">
-            <a class="active" href="#home" id="home-link"><img src="home.png" alt="Home"></a>
-            <a href="#projects" id="projects-link"><img src="projects.png" alt="Projects"></a>
-            <a href="contact.html" id="contact-link"><img src="contact.png" alt="Contact"></a>
-            <a href="about.html" id="about-link"><img src="about_Me.png" alt="About"></a>
-        </div>
-        
-        <div class="centered-text" id="centered-text">
-            <h1>Avery Beuth</h1>
-            <h2>Year 11 Portfolio</h2>
-        </div>
-        
-        <section id="projects">
-            <h2>Projects</h2>
-            <div class="project-boxes">
-                <div class="project-box">
-                    <h3>Project 1</h3>
-                    <p>Description of Project 1</p>
-                </div>
-                <div class="project-box">
-                    <h3>Project 2</h3>
-                    <p>Description of Project 2</p>
-                </div>
-                <div class="project-box">
-                    <h3>Project 3</h3>
-                    <p>Description of Project 3</p>
-                </div>
+    
+    <div class="centered-text" id="centered-text">
+        <h1>
+            <span>A</span><span>v</span><span>e</span><span>r</span><span>y</span> 
+            <span>B</span><span>e</span><span>u</span><span>t</span><span>h</span>
+        </h1>
+        <h2>
+            <span>Y</span><span>e</span><span>a</span><span>r</span> 
+            <span>1</span><span>1</span> 
+            <span>P</span><span>o</span><span>r</span><span>t</span><span>f</span><span>o</span><span>l</span><span>i</span><span>o</span>
+        </h2>
+    </div>
+    
+    <section id="projects">
+        <h2>Projects</h2>
+        <div class="project-boxes">
+            <div class="project-box">
+                <h3>Project 1</h3>
+                <p>Description of Project 1</p>
             </div>
-        </section>
-    </div>
+            <div class="project-box">
+                <h3>Project 2</h3>
+                <p>Description of Project 2</p>
+            </div>
+            <div class="project-box">
+                <h3>Project 3</h3>
+                <p>Description of Project 3</p>
+            </div>
+        </div>
+    </section>
 
     <script>
-        document.onreadystatechange = function () {
-            var loadingBar = document.getElementById('loading-bar');
-            var loadingBarContainer = document.getElementById('loading-bar-container');
-            var content = document.getElementById('content');
-            if (document.readyState === 'interactive') {
-                loadingBar.style.width = '100%';
-            } else if (document.readyState === 'complete') {
-                setTimeout(function() {
-                    loadingBarContainer.style.display = 'none';
-                    content.style.display = 'block';
-                    document.body.style.overflow = 'auto'; // Restore overflow
-                }, 4000); // 4 seconds
-            }
-        };
-
         window.onscroll = function() {
             var homeLink = document.getElementById("home-link");
             var projectsLink = document.getElementById("projects-link");
@@ -196,8 +162,8 @@
 
         document.addEventListener('mousemove', function(e) {
             var centeredText = document.getElementById('centered-text');
-            var x = e.clientX / window.innerWidth * 15 - 10; // Adjust the multiplier and offset as needed
-            var y = e.clientY / window.innerHeight * 15 - 10; // Adjust the multiplier and offset as needed
+            var x = e.clientX / window.innerWidth * 15 - 10; 
+            var y = e.clientY / window.innerHeight * 15 - 10; 
             centeredText.style.transform = 'translate(-50%, -50%) translate(' + x + 'px, ' + y + 'px)';
         });
     </script>
